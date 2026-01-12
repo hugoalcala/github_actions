@@ -25,15 +25,15 @@ describe('GET', function(){
 		      .expect(200, done);
 		    })
 
-	  it('/api respuesta contiene los nuevos animales', function(done){
-        request
-        .get('/api')
-        .set('Accept', 'application/json')
-        .expect(200)
-        .expect(function(res) {
-            if (!res.body.duck) throw new Error("Falta el pato");
-            if (!res.body.horse) throw new Error("Falta el caballo");
-        })
-        .end(done);
-    });
+	it('/api respuesta contiene los animales nuevos', function(done){
+		      request
+		      .get('/api')
+		      .set('Accept', 'application/json')
+		      .expect(200)
+              .expect(function(res) {
+                if (!res.body.duck) throw new Error("Falta el pato");
+                if (!res.body.horse) throw new Error("Falta el caballo");
+              })
+              .end(done);
+		    });
 })
