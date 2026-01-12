@@ -2,6 +2,8 @@ const express = require('express');
 const _ = require('underscore');
 
 const port = process.env.PORT || 3000;
+
+// 1. El objeto con todos los animales (incluyendo duck y horse)
 const animals = {
     "cat": "meow",
     "dog": "bark",
@@ -14,12 +16,14 @@ const animals = {
     "horse": "neigh"
 };
 
+// 2. Función para elegir un animal al azar de la lista completa
 function getAnimal() {
   return _.sample(Object.entries(animals));
 }
 
 const app = express();
 
+// 3. Ruta principal: ahora usará el objeto actualizado
 app.get('/', async (req, res, next) => {
   try {
     const [animal_name, sound] = getAnimal();
@@ -38,6 +42,7 @@ app.get('/', async (req, res, next) => {
   }
 });
 
+// 4. Ruta API: enviará el JSON que el test necesita para ponerse en VERDE
 app.get('/api', async (req, res, next) => {
   try {
     res.status(200).json(animals);
@@ -46,7 +51,6 @@ app.get('/api', async (req, res, next) => {
   }
 });
 
-// Middleware para manejar errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something went wrong!');
@@ -56,4 +60,4 @@ const server = app.listen(port, () => {
   console.log(`Launching server on http://localhost:${port}`);
 });
 
-module.exports = server; 
+module.exports = server;
