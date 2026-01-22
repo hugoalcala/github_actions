@@ -56,8 +56,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
-const server = app.listen(port, () => {
-  console.log(`Launching server on http://localhost:${port}`);
-});
-
-module.exports = server;
+module.exports = app;
